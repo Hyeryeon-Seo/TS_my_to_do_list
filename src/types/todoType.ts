@@ -11,7 +11,10 @@ export interface TodoSetList {
 	setTodoList: (cb: (todoList: Todo[]) => Todo[]) => void;
 }
 
-// export interface TodoIdSetTodoList {
-// 	id: string;
-// 	setTodoList: (cb: (todoList: Todo[]) => Todo[]) => void;
-// }
+export interface InProgressTodo extends Todo {
+	isDone: false;
+}
+
+export interface DoneTodo extends Todo {
+	isDone: true;
+}
