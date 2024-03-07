@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+function Header() {
+	return (
+		<header>
+			<HeaderTitle>💕 My To-Do List 🐾</HeaderTitle>
+			<HeaderName>React 4기 서혜련</HeaderName>
+		</header>
+	);
+}
+
+export default Header;
+
 const HeaderTitle = styled.h1`
 	font-family: "Pretendard-Black"; /*두꺼운폰트적용*/
 	font-size: 30px;
@@ -15,14 +26,3 @@ const HeaderName = styled.h1`
 	margin-top: 20px;
 	color: slategray;
 `;
-
-function Header() {
-	return (
-		<header>
-			<HeaderTitle>💕 My To-Do List 🐾</HeaderTitle>
-			<HeaderName>React 4기 서혜련</HeaderName>
-		</header>
-	);
-}
-
-export default Header;

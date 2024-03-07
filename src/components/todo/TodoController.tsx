@@ -54,19 +54,39 @@ function TodoController({ todoList, setTodoList }: TodoSetList) {
 	// 마감일 입력x로 미정시, 그 카드들은 순서정렬자체가 안되는 문제 (그대로있음) -> 미정 시에도 9999-.. 날짜부여해서 해결
 	// useEffect 사용 가능
 	const sortTodoItems = (sortOrder: string) => {
-		const newOrderDeadline = [...todoList].sort((a, b) => {
-			if (sortOrder === "asc") {
-				// 다시 체크
-				return new Date(a.deadline) - new Date(b.deadline);
-			} else {
-				return new Date(b.deadline) - new Date(a.deadline);
-			}
-		});
-		setTodoList(newOrderDeadline); // 정렬된 todoitem으로 todolist 상태 업데이트
+		// const newOrderDeadline = [...todoList].sort((a, b) => {
+		// 	if (sortOrder === "asc") {
+		// 		// 다시 체크
+		// 		return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+		// 	} else {
+		// 		return new Date(b.deadline).getTime() - new Date(a.deadline).getTime();
+		// 	}
+		// });
+		setTodoList((prevTodoList) =>
+			[...prevTodoList].sort((a, b) => {
+				if (sortOrder === "asc") {
+					// 다시 체크
+					return (
+						new Date(a.deadline).getTime() - new Date(b.deadline).getTime()
+					);
+				} else {
+					return (
+						new Date(b.deadline).getTime() - new Date(a.deadline).getTime()
+					);
+				}
+			})
+		); // 정렬된 todoitem으로 todolist 상태 업데이트
 	};
 
 	// 추가하기 버튼 addTodoHandler
-	const addTodoHandler = (newTodo: Todo) => {
+	const addTodoHandler = (
+		// {
+		// newTodo,
+		// setTodoList,
+		// }: {
+		newTodo: Todo
+		// setTodoList: (cb: (todoList: Todo[]) => Todo[]) => void;  }
+	) => {
 		// 개선: setTodoList([...todoList, newTodo]);도 기능은 잘 되지만, 빠르게 제출 시 에러날 수 있어서
 		// 그냥 todoList가 아닌, 버튼누른당시?의 prevTodoList를 넣어서 작동하게 한다 ?
 		// => set메서드 안 콜백함수로 처리 & 받은 newTodo를 맨 앞에 오도록 처리 -> 변경
@@ -85,6 +105,14 @@ function TodoController({ todoList, setTodoList }: TodoSetList) {
 		const title = formData.get("title") as string;
 		const content = formData.get("content") as string;
 		// const deadline = formData.get("deadline") as Date; // ?
+
+		const nextTodo: Todo = {
+			id: crypto.randomUUID(),
+			title,
+			content,
+			deadline,
+			isDone: false,
+		};
 
 		// 개선: 유효성 검사 추가
 		if (!title || !content) {
@@ -106,13 +134,7 @@ function TodoController({ todoList, setTodoList }: TodoSetList) {
 			setContent("");
 			setDeadline("");
 		} else {
-			addTodoHandler({
-				id: crypto.randomUUID(), // id: todoList.length -id 중복 가능성 -> 개선: 고유한id부여- Date.now()도 가능 & crypto.randomUUID() 사용
-				title, // input에 입력된 title,body - setTitle,setBody로 title,body 설정됨 (초기값에서)
-				content,
-				deadline, //?
-				isDone: false,
-			});
+			addTodoHandler(nextTodo);
 			setTitle(""); //초기화 - 개선: else케이스 안에 넣어서 추가(제출)되었을때만 초기화시킴
 			setContent("");
 			setDeadline("");
@@ -121,16 +143,24 @@ function TodoController({ todoList, setTodoList }: TodoSetList) {
 
 	// 삭제 버튼: filter메서드로 해당id의 카드빼기
 	const deleteTodoHandler = (id: string) => {
+		// const newTodoList = todoList.filter((todo) => todo.id === id);
 		setTodoList((prevTodoList) =>
 			prevTodoList.filter((todo) => todo.id !== id)
-		); // 개선: setTodoList()안 콜백함수 (에러방지)
+		);
+		// setTodoList(newTodoList);
 	};
 
 	// Done 완료&완료취소 버튼 (토글)=> 해당id의 todo 의 key값, isDone의 value값을 false <-> true 로 변경해야
 	const onToggleTodoItem = (id: string) => {
 		// 개선: 위와 마찬가지로 set..()안 콜백함수 /
-		setTodoList((prevTodos) =>
-			prevTodos.map((todo) => {
+		// const newTodoList = todoList.map((todo) => {
+		// 	if (todo.id === id) {
+		// 		return { ...todo, isDone: !todo.isDone };
+		// 	}
+		// 	return todo;
+		// });
+		setTodoList((prevTodoList) =>
+			prevTodoList.map((todo) => {
 				if (todo.id === id) {
 					return { ...todo, isDone: !todo.isDone };
 				}
@@ -174,8 +204,6 @@ function TodoController({ todoList, setTodoList }: TodoSetList) {
 					todoList={doneTodoList}
 					deleteTodoHandler={deleteTodoHandler}
 					onToggleTodoItem={onToggleTodoItem}
-					// deadlineText={deadlineText}
-					// setDeadlinetText={setDeadlinetText}
 				>
 					Done 🎉
 				</TodoList>

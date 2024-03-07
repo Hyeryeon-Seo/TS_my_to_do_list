@@ -8,5 +8,10 @@ export interface Todo {
 
 export interface TodoSetList {
 	todoList: Todo[];
-	setTodoList: (todoList: Todo[]) => void;
+	setTodoList: (cb: (todoList: Todo[]) => Todo[]) => void;
 }
+
+// export interface TodoIdSetTodoList {
+// 	id: string;
+// 	setTodoList: (cb: (todoList: Todo[]) => Todo[]) => void;
+// }

@@ -3,7 +3,7 @@ import CustomInput from "../common/CustomInput";
 import * as S from "../../styles/TodoStyle";
 
 function TodoForm({
-	handleFormSubmit,
+	onSubmit,
 	valueTitle,
 	valueContent,
 	valueDeadline,
@@ -11,7 +11,7 @@ function TodoForm({
 	onChangeContent,
 	onChangeDeadline,
 }: {
-	handleFormSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+	onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 	valueTitle: string;
 	valueContent: string;
 	valueDeadline: string;
@@ -20,7 +20,7 @@ function TodoForm({
 	onChangeDeadline: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
 	return (
-		<form onSubmit={handleFormSubmit}>
+		<form onSubmit={onSubmit}>
 			<CustomInput
 				name="title"
 				type="text"

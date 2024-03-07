@@ -1,5 +1,4 @@
-// import { Link } from "react-router-dom";
-import { link } from "fs";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const BigBtn = styled.button`
@@ -29,7 +28,7 @@ export const TodoBox = styled.ul`
 `;
 
 //NOTE - 스타일컴포넌트에서도 Link 는 임포트해와야함! & 괄호안에 쓰는거주의
-export const TodoLink = styled(link)`
+export const TodoLink = styled(Link)`
 	text-decoration: none;
 	color: black;
 `;
