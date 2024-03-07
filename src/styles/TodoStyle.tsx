@@ -27,7 +27,6 @@ export const TodoBox = styled.ul`
 	}
 `;
 
-//NOTE - 스타일컴포넌트에서도 Link 는 임포트해와야함! & 괄호안에 쓰는거주의
 export const TodoLink = styled(Link)`
 	text-decoration: none;
 	color: black;
@@ -44,7 +43,6 @@ export const TodoTextBox = styled.div<TodoTextBoxProps>`
 	flex-direction: column;
 	gap: 1rem;
 	word-wrap: break-word;
-	/*영어만 제목에서 줄바꿈안되는 현상 발견 > 영어,단어기준- 이걸해야만 영어글자 삐져나옴에 적용돼 해결! */
 `;
 
 export const TodoTitle = styled.h2`
@@ -64,7 +62,7 @@ export const TodoDeadline = styled.time`
 	margin: 20px 20px 10px auto;
 	color: rgb(73, 65, 70);
 	width: 90%;
-	text-align: end; /*width %와 같이써야 적용*/
+	text-align: end;
 	font-size: 15px;
 `;
 

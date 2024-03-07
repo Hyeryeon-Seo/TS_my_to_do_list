@@ -12,7 +12,7 @@ function Header() {
 export default Header;
 
 const HeaderTitle = styled.h1`
-	font-family: "Pretendard-Black"; /*두꺼운폰트적용*/
+	font-family: "Pretendard-Black";
 	font-size: 30px;
 	font-weight: 900;
 	margin-left: 20px;

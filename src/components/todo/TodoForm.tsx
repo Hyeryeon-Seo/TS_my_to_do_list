@@ -1,4 +1,3 @@
-// import React from "react";
 import CustomInput from "../common/CustomInput";
 import * as S from "../../styles/TodoStyle";
 

@@ -18,7 +18,6 @@ const Router = () => {
 					/>
 					<Route path="/:todoId" element={<Detail todoList={todoList} />} />
 					<Route path="*" element={<Navigate replace to="/" />} />
-					{/*그 외 다른 path name이 url에 온 경우(*) 홈으로 이동(redirect)시키기 : Navigate사용 */}
 				</Routes>
 			</BrowserRouter>
 		</>

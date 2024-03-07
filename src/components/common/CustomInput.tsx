@@ -15,7 +15,6 @@ function CustomInput({
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	placeholder?: string;
 }) {
-	// const { children, name, type, value, onChange, placeholder } = props;
 	return (
 		<InputBox>
 			<InputText>{children}</InputText>

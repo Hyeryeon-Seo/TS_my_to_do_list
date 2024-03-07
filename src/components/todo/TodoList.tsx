@@ -55,8 +55,8 @@ const List = styled.li`
 	/* 최대 최소넓이는 리스트 뜨는 부분에만 적용*/
 	min-width: 800px;
 	max-width: 1200px;
-	min-height: 250px; /*이래야 카드없어도 어느정도 리스트높이유지*/
-	flex-wrap: wrap; /*필수! 카드리스트 다음 줄 이동하게 해줌*/
+	min-height: 250px;
+	flex-wrap: wrap;
 `;
 
 const ListTitle = styled.h2`
