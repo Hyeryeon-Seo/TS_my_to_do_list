@@ -7,15 +7,18 @@ const Detail = ({ todoList }: { todoList: Todo[] }) => {
 	const { todoId } = useParams();
 
 	const navigate = useNavigate();
-	const selectedTodo: Todo[] = todoList.find(
-		(todo: Todo) => todo.id.toString() === todoId
-	); // {}쓰고 return을 쓰든지, 그냥 => return없이 쓰든지
-	// toString() 없어도될듯
+	const selectedTodo: Todo[] | unknown = todoList.find(
+		(todo: Todo) => todo.id === todoId
+	);
 
 	// 홈 화면으로 이동
 	const onClickHomeHandler = () => {
 		navigate("/");
 	};
+
+	if (!todoList) {
+		throw new Error("Unexpected error: Cannot find 'todoList'");
+	}
 
 	return (
 		<div>
@@ -33,9 +36,8 @@ const Detail = ({ todoList }: { todoList: Todo[] }) => {
 						</S.TodoContent>
 					</S.TodoDetailBox>
 					<S.TodoDeadline>
-						{selectedTodo.deadline === 9956
-							? //마감일 미정시 9999-12-31로 대충 날짜 설정했는데 9956숫자로 뜸 => FIXME 수정해야 STRING이라서
-							  "마감일 미정"
+						{selectedTodo.deadline === "9999-12-31"
+							? "마감일 미정"
 							: `마감일 : ${selectedTodo.deadline}`}
 					</S.TodoDeadline>
 				</S.DetailBox>
