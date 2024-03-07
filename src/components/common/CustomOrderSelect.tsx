@@ -1,5 +1,27 @@
-import React from "react";
 import styled from "styled-components";
+
+function CustomOrderSelect({
+	children,
+	selectValue,
+	selectOnChange,
+}: {
+	children: string;
+	selectValue: string;
+	selectOnChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+}) {
+	return (
+		<OrderSection>
+			<OrderTitle>{children}</OrderTitle>
+			<Select value={selectValue} onChange={selectOnChange}>
+				{/*드롭다운 목록*/}
+				<option value="desc">빠른 순</option>
+				<option value="asc">느린 순</option>
+			</Select>
+		</OrderSection>
+	);
+}
+
+export default CustomOrderSelect;
 
 const OrderTitle = styled.h3`
 	margin: 7px 20px auto 10px;
@@ -20,18 +42,3 @@ const Select = styled.select`
 	padding: 5px;
 	border-radius: 10px;
 `;
-
-function CustomOrderSelect({ children, selectValue, selectOnChange }) {
-	return (
-		<OrderSection>
-			<OrderTitle>{children}</OrderTitle>
-			<Select value={selectValue} onChange={selectOnChange}>
-				{/*드롭다운 목록*/}
-				<option value="desc">빠른 순</option>
-				<option value="asc">느린 순</option>
-			</Select>
-		</OrderSection>
-	);
-}
-
-export default CustomOrderSelect;

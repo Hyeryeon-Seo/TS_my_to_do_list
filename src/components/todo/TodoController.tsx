@@ -36,13 +36,7 @@ function TodoController({ todoList, setTodoList }: TodoSetList) {
 	};
 
 	// 추가: 마감날짜 오름차순 내림차순 정렬 드롭다운 메뉴 _select 설정시
-	const handleSortOrderChange = ({
-		e,
-		sortOrder,
-	}: {
-		e: React.ChangeEvent<HTMLInputElement>;
-		sortOrder: string;
-	}) => {
+	const handleSortOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		// TS sortOrder 도 인자 넣어줘야하나? => 해도 x
 		setSortOrder(e.target.value);
 		sortTodoItems(sortOrder);
@@ -101,9 +95,9 @@ function TodoController({ todoList, setTodoList }: TodoSetList) {
 		e.preventDefault();
 
 		// ts
-		const formData = new FormData(e.currentTarget);
-		const title = formData.get("title") as string;
-		const content = formData.get("content") as string;
+		// const formData = new FormData(e.currentTarget);
+		// const title = formData.get("title") as string;
+		// const content = formData.get("content") as string;
 		// const deadline = formData.get("deadline") as Date; // ?
 
 		const nextTodo: Todo = {
