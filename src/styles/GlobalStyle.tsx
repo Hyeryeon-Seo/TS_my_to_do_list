@@ -192,14 +192,6 @@ table {
   width: 1110px;
   }
 
-  /* input {
-    height: 30px;
-    font-size: 15px;
-    margin-top: 15px;
-    border-radius: 5px;
-    border: 0px;
-  } */
-
   form {
 	width: 100%;
 	background-color: rgb(245, 203, 169);
