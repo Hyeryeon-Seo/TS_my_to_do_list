@@ -3,7 +3,12 @@ import TodoForm from "./TodoForm";
 import CustomOrderSelect from "../common/CustomOrderSelect";
 import TodoList from "./TodoList";
 import styled from "styled-components";
-import { Todo, TodoSetList } from "../../types/todoType";
+import {
+	DoneTodo,
+	InProgressTodo,
+	Todo,
+	TodoSetList,
+} from "../../types/todoType";
 
 const ListsSection = styled.section`
 	max-height: 1000px;
@@ -163,8 +168,12 @@ function TodoController({ todoList, setTodoList }: TodoSetList) {
 		);
 	};
 
-	const workingTodoList = todoList.filter((todo) => todo.isDone === false);
-	const doneTodoList = todoList.filter((todo) => todo.isDone === true);
+	const workingTodoList = todoList.filter(
+		(todo) => todo.isDone === false
+	) as InProgressTodo[];
+	const doneTodoList = todoList.filter(
+		(todo) => todo.isDone === true
+	) as DoneTodo[];
 
 	return (
 		<main>
