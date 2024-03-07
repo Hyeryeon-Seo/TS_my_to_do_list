@@ -1,8 +1,21 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const BigBtn = styled.button`
-	background-color: rgb(253, 232, 250);
+export interface TodoPageTypeProps {
+	$pageType?: string;
+}
+
+export interface TodoTextBoxProps {
+	type: string;
+}
+
+export interface BtnDelDoneProps {
+	type: string;
+}
+
+export const BigBtn = styled.button<TodoPageTypeProps>`
+	background-color: ${({ $pageType }) =>
+		$pageType === "detail" ? "rgb(228, 197, 223)" : "rgb(253, 232, 250)"};
 	width: 150px;
 	height: 40px;
 	border: none;
@@ -32,10 +45,6 @@ export const TodoLink = styled(Link)`
 	color: black;
 `;
 
-export interface TodoTextBoxProps {
-	type: string;
-}
-
 export const TodoTextBox = styled.div<TodoTextBoxProps>`
 	text-decoration: ${({ type }) =>
 		type === "working" ? "none" : "line-through gray"};
@@ -52,28 +61,26 @@ export const TodoTitle = styled.h2`
 	line-height: 1.5em;
 `;
 
-export const TodoContent = styled.p`
+export const TodoContent = styled.p<TodoPageTypeProps>`
 	margin: 0 20px 10px 20px;
 	line-height: 1.5em;
 	min-height: 20px;
+	font-size: ${({ $pageType }) => ($pageType === "detail" ? "18px" : "")};
 `;
 
-export const TodoDeadline = styled.time`
-	margin: 20px 20px 10px auto;
+export const TodoDeadline = styled.time<TodoPageTypeProps>`
+	margin: ${({ $pageType }) =>
+		$pageType === "detail" ? "15px 20px 30px auto" : "20px 20px 10px auto"};
 	color: rgb(73, 65, 70);
 	width: 90%;
 	text-align: end;
-	font-size: 15px;
+	font-size: ${({ $pageType }) => ($pageType === "detail" ? "18px" : "15px")};
 `;
 
 export const TodoBtnBox = styled.div`
 	display: flex;
 	justify-content: space-between;
 `;
-
-export interface BtnDelDoneProps {
-	type: string;
-}
 
 export const BtnDelDone = styled.button<BtnDelDoneProps>`
 	background-color: rgb(250, 243, 231);
@@ -116,7 +123,12 @@ export const DetailBox = styled.div`
 	border: none;
 	border-radius: 5px;
 	width: 500px;
-	height: 300px;
+	min-height: 300px;
 	margin-right: 15px;
 	box-shadow: 0px 0px 3px 1px lightcoral;
+`;
+
+export const TitleContentInputBox = styled.div`
+	display: flex;
+	flex-direction: column;
 `;

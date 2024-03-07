@@ -21,29 +21,32 @@ const Detail = ({ todoList }: { todoList: Todo[] }) => {
 	}
 
 	return (
-		<div>
+		<>
 			<Header />
 			<S.HomeBtnBox>
-				<S.BigBtn onClick={onClickHomeHandler}>HOME</S.BigBtn>
+				<S.BigBtn onClick={onClickHomeHandler} $pageType="detail">
+					HOME
+				</S.BigBtn>
 			</S.HomeBtnBox>
 			<S.DetailWrapper>
 				<S.DetailBox>
 					<S.TodoDetailBox>
 						<S.TodoTitle>{selectedTodo.title}</S.TodoTitle>
-						<S.TodoContent>{selectedTodo.content}</S.TodoContent>
-						<S.TodoContent>
+						<S.TodoContent $pageType="detail">
+							{selectedTodo.content}
+						</S.TodoContent>
+						<S.TodoContent $pageType="detail">
 							{selectedTodo.isDone ? "👍 완료 🎉" : "🏃‍♀️ 진행 중 🏃"}
 						</S.TodoContent>
 					</S.TodoDetailBox>
-					<S.TodoDeadline>
+					<S.TodoDeadline $pageType="detail">
 						{selectedTodo.deadline === "9999-12-31"
 							? "마감일 미정"
-							: `마감일 : ${selectedTodo.deadline}`}
+							: `마감일 │ ${selectedTodo.deadline}`}
 					</S.TodoDeadline>
 				</S.DetailBox>
 			</S.DetailWrapper>
-			<S.TodoBtnBox></S.TodoBtnBox>
-		</div>
+		</>
 	);
 };
 

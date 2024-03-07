@@ -20,24 +20,27 @@ function TodoForm({
 }) {
 	return (
 		<form onSubmit={onSubmit}>
-			<CustomInput
-				name="title"
-				type="text"
-				value={valueTitle}
-				onChange={onChangeTitle}
-				placeholder=" title ..."
-			>
-				제목
-			</CustomInput>
-			<CustomInput
-				name="content"
-				type="text"
-				value={valueContent}
-				onChange={onChangeContent}
-				placeholder=" content ..."
-			>
-				내용
-			</CustomInput>
+			<S.TitleContentInputBox>
+				<CustomInput
+					name="title"
+					type="text"
+					value={valueTitle}
+					onChange={onChangeTitle}
+					placeholder=" title ..."
+				>
+					제목
+				</CustomInput>
+				<CustomInput
+					name="content"
+					type="text"
+					value={valueContent}
+					onChange={onChangeContent}
+					placeholder=" content ..."
+					$style="content"
+				>
+					내용
+				</CustomInput>
+			</S.TitleContentInputBox>
 			<CustomInput
 				name="date"
 				type="date"
