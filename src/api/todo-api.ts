@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { Todo } from "../types/todoType";
 
 const todoClient = axios.create({
@@ -9,13 +9,14 @@ const todoClient = axios.create({
 	},
 });
 
-const fetchTodos = async (): Promise<Todo[]> => {
+const fetchTodos = async (): Promise<Todo[] | undefined> => {
 	try {
 		const { data } = await todoClient.get("/"); // <Promise<Todo[]>>
 		return data;
-	} catch (error: any) {
-		console.log(error);
-		throw new Error(error.message);
+	} catch (error: AxiosError | unknown) {
+		if (axios.isAxiosError(error)) {
+			throw new Error(error.message);
+		}
 	}
 };
 
@@ -46,7 +47,8 @@ const removeTodo = async (id: string): Promise<void> => {
 	}
 };
 
-const updateTodo = async (id: string, todo: Todo): Promise<void> => {
+const updateTodo = async (id: string, todo: Todo) => {
+	//:  Promise<void>
 	try {
 		await todoClient.patch(`/${id}`, todo);
 	} catch (error: any) {
