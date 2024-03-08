@@ -6,11 +6,11 @@ export interface TodoPageTypeProps {
 }
 
 export interface TodoTextBoxProps {
-	type: string;
+	$type: string;
 }
 
 export interface BtnDelDoneProps {
-	type: string;
+	$type: string;
 }
 
 export const BigBtn = styled.button<TodoPageTypeProps>`
@@ -46,8 +46,8 @@ export const TodoLink = styled(Link)`
 `;
 
 export const TodoTextBox = styled.div<TodoTextBoxProps>`
-	text-decoration: ${({ type }) =>
-		type === "working" ? "none" : "line-through gray"};
+	text-decoration: ${({ $type }) =>
+		$type === "working" ? "none" : "line-through gray"};
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
@@ -90,8 +90,8 @@ export const BtnDelDone = styled.button<BtnDelDoneProps>`
 	margin: 10px 10px 20px 10px;
 	&:hover {
 		color: white;
-		background-color: ${({ type }) =>
-			type === "delete" ? "rgb(250, 95, 67)" : "rgb(104, 104, 250)"};
+		background-color: ${({ $type }) =>
+			$type === "delete" ? "rgb(250, 95, 67)" : "rgb(104, 104, 250)"};
 	}
 `;
 

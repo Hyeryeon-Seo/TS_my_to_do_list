@@ -1,12 +1,11 @@
 import Header from "../components/layout/Header";
 import TodoController from "../components/todo/TodoController";
-import { TodoSetList } from "../types/todoType";
 
-const Home = ({ todoList, setTodoList }: TodoSetList) => {
+const Home = () => {
 	return (
 		<div>
 			<Header />
-			<TodoController todoList={todoList} setTodoList={setTodoList} />
+			<TodoController />
 		</div>
 	);
 };

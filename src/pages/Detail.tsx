@@ -2,8 +2,10 @@ import Header from "../components/layout/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../styles/TodoStyle";
 import { Todo } from "../types/todoType";
+import { useAppSelector } from "../../config/configStore";
 
-const Detail = ({ todoList }: { todoList: Todo[] }) => {
+const Detail = () => {
+	const todoList = useAppSelector((state) => state.todoList);
 	const { todoId } = useParams();
 
 	const navigate = useNavigate();
