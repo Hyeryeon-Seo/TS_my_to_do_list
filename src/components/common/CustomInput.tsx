@@ -4,16 +4,12 @@ function CustomInput({
 	children,
 	name,
 	type,
-	value,
-	onChange,
 	placeholder,
 	$style,
 }: {
 	children: string;
 	name: string;
 	type: string;
-	value: string;
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	placeholder?: string;
 	$style?: string;
 }) {
@@ -23,8 +19,6 @@ function CustomInput({
 			<Input
 				name={name}
 				type={type}
-				value={value}
-				onChange={onChange}
 				placeholder={placeholder}
 				$style={$style}
 			/>

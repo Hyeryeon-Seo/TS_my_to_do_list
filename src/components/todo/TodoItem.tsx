@@ -1,23 +1,12 @@
+import { useAppDispatch } from "../../config/configStore";
+import { deleteTodo, toggleTodo } from "../../modules/todoListSlice";
 import * as S from "../../styles/TodoStyle";
 import { Todo } from "../../types/todoType";
 
-function TodoItem({
-	type,
-	todo,
-	title,
-	content,
-	deadline,
-	deleteTodoHandler,
-	onToggleTodoItem,
-}: {
-	type: string;
-	todo: Todo;
-	title: string;
-	content: string;
-	deadline: string;
-	deleteTodoHandler: (id: string) => void;
-	onToggleTodoItem: (id: string) => void;
-}) {
+function TodoItem({ type, todo }: { type: string; todo: Todo }) {
+	const dispatch = useAppDispatch();
+
+	const { id, title, content, deadline } = todo;
 	let dateDeadline = "";
 	let deadlineText = "";
 	if (deadline === "9999-12-31") {
@@ -32,20 +21,30 @@ function TodoItem({
 		deadlineText = dateDeadline + "까지";
 	}
 
+	// 삭제 버튼: filter메서드로 해당id의 카드빼기
+	const deleteTodoHandler = (id: string) => {
+		dispatch(deleteTodo(id));
+	};
+
+	// Done 완료&완료취소 버튼 (토글)
+	const onToggleTodoItem = (id: string) => {
+		dispatch(toggleTodo(id));
+	};
+
 	return (
-		<S.TodoBox key={todo.id}>
-			<S.TodoLink to={`${todo.id}`}>
-				<S.TodoTextBox type={type}>
+		<S.TodoBox key={id}>
+			<S.TodoLink to={`${id}`}>
+				<S.TodoTextBox $type={type}>
 					<S.TodoTitle>{title}</S.TodoTitle>
 					<S.TodoContent>{content}</S.TodoContent>
 					<S.TodoDeadline>{deadlineText}</S.TodoDeadline>
 				</S.TodoTextBox>
 			</S.TodoLink>
 			<S.TodoBtnBox>
-				<S.BtnDelDone onClick={() => deleteTodoHandler(todo.id)} type="delete">
+				<S.BtnDelDone onClick={() => deleteTodoHandler(id)} $type="delete">
 					삭제
 				</S.BtnDelDone>
-				<S.BtnDelDone onClick={() => onToggleTodoItem(todo.id)} type="isDone">
+				<S.BtnDelDone onClick={() => onToggleTodoItem(id)} $type="isDone">
 					{type === "working" ? "완료" : "완료 취소"}
 				</S.BtnDelDone>
 			</S.TodoBtnBox>
