@@ -4,15 +4,13 @@ import CustomOrderSelect from "../common/CustomOrderSelect";
 import TodoList from "./TodoList";
 import styled from "styled-components";
 import { useAppDispatch } from "../../config/configStore";
-import { getTodos, sortTodos } from "../../modules/todoListSlice";
-import { fetchTodos } from "../../api/todo-api";
+import { getTodosThunk, sortTodos } from "../../modules/todoListSlice";
 
 function TodoController() {
 	const dispatch = useAppDispatch();
 
 	const fetchTodoList = async () => {
-		const data = await fetchTodos();
-		dispatch(getTodos(data));
+		dispatch(getTodosThunk());
 	};
 
 	const [sortOrder, setSortOrder] = useState<string>("asc");

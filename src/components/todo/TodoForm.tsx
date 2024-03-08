@@ -2,16 +2,14 @@ import CustomInput from "../common/CustomInput";
 import * as S from "../../styles/TodoStyle";
 import { Todo } from "../../types/todoType";
 import { useAppDispatch } from "../../config/configStore";
-import { addTodo } from "../../modules/todoListSlice";
-import { createTodo } from "../../api/todo-api";
+import { addTodoThunk } from "../../modules/todoListSlice";
 
 function TodoForm() {
 	const dispatch = useAppDispatch();
 
 	// 추가하기 버튼 addTodoHandler
-	const addTodoHandler = async (newTodo: Todo) => {
-		await createTodo(newTodo);
-		dispatch(addTodo(newTodo));
+	const addTodoHandler = (newTodo: Todo) => {
+		dispatch(addTodoThunk(newTodo));
 	};
 
 	// form태그에 들어가는 함수 - 입력 후 추가하기로 실행
