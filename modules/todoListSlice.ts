@@ -1,16 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Todo } from "../src/types/todoType";
+import { sampleTodo } from "../src/assets/sampleTodo";
 // PayloadAction = action.payload 필드의 타입을 지정할 수 있게 해주는 제네릭이다.
 
-const initialState: Todo[] = [
-	{
-		id: "0",
-		title: "인증/인가 특강 복습하기",
-		content: "인증/인가, 로그인/회원가입 로직 복습",
-		deadline: "2024-03-10",
-		isDone: false,
-	},
-];
+const initialState: Todo[] = sampleTodo;
 
 export const todoListSlice = createSlice({
 	name: "todoList",
