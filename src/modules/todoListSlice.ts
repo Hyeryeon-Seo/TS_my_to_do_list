@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Todo } from "../src/types/todoType";
-import { sampleTodo } from "../src/assets/sampleTodo";
+import { sampleTodo } from "../assets/sampleTodo";
+import { Todo } from "../types/todoType";
 // PayloadAction = action.payload 필드의 타입을 지정할 수 있게 해주는 제네릭이다.
 
 const initialState: Todo[] = sampleTodo;

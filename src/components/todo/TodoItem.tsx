@@ -1,5 +1,5 @@
-import { useAppDispatch } from "../../../config/configStore";
-import { deleteTodo, toggleTodo } from "../../../modules/todoListSlice";
+import { useAppDispatch } from "../../config/configStore";
+import { deleteTodo, toggleTodo } from "../../modules/todoListSlice";
 import * as S from "../../styles/TodoStyle";
 import { Todo } from "../../types/todoType";
 

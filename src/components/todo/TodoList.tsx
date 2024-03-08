@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../../config/configStore";
+import { useAppSelector } from "../../config/configStore";
 import { DoneTodo, InProgressTodo } from "../../types/todoType";
 import TodoItem from "./TodoItem";
 import * as S from "../../styles/TodoStyle";

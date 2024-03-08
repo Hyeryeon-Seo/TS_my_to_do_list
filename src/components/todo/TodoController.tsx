@@ -3,8 +3,8 @@ import TodoForm from "./TodoForm";
 import CustomOrderSelect from "../common/CustomOrderSelect";
 import TodoList from "./TodoList";
 import styled from "styled-components";
-import { sortTodos } from "../../../modules/todoListSlice";
-import { useAppDispatch } from "../../../config/configStore";
+import { useAppDispatch } from "../../config/configStore";
+import { sortTodos } from "../../modules/todoListSlice";
 
 function TodoController() {
 	const dispatch = useAppDispatch();

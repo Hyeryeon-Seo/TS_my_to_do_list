@@ -1,8 +1,8 @@
 import CustomInput from "../common/CustomInput";
 import * as S from "../../styles/TodoStyle";
 import { Todo } from "../../types/todoType";
-import { useAppDispatch } from "../../../config/configStore";
-import { addTodo } from "../../../modules/todoListSlice";
+import { useAppDispatch } from "../../config/configStore";
+import { addTodo } from "../../modules/todoListSlice";
 
 function TodoForm() {
 	const dispatch = useAppDispatch();
