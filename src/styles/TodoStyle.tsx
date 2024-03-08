@@ -13,6 +13,11 @@ export interface BtnDelDoneProps {
 	type: string;
 }
 
+export const ListsSection = styled.section`
+	max-height: 1000px;
+	margin-top: 30px;
+`;
+
 export const BigBtn = styled.button<TodoPageTypeProps>`
 	background-color: ${({ $pageType }) =>
 		$pageType === "detail" ? "rgb(228, 197, 223)" : "rgb(253, 232, 250)"};

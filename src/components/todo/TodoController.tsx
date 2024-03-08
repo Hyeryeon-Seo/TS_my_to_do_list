@@ -2,18 +2,13 @@ import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import CustomOrderSelect from "../common/CustomOrderSelect";
 import TodoList from "./TodoList";
-import styled from "styled-components";
 import {
 	DoneTodo,
 	InProgressTodo,
 	Todo,
 	TodoSetList,
 } from "../../types/todoType";
-
-const ListsSection = styled.section`
-	max-height: 1000px;
-	margin-top: 30px;
-`;
+import { ListsSection } from "../../styles/TodoStyle";
 
 function TodoController({ todoList, setTodoList }: TodoSetList) {
 	const [title, setTitle] = useState("");
