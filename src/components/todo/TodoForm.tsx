@@ -29,7 +29,7 @@ function TodoForm() {
 			isDone: false,
 		};
 
-		if (!title || !content) {
+		if (!title.trim() || !content.trim()) {
 			alert("제목과 내용 모두 입력해주세요");
 			// 이 경우 초기화없이 입력내용 유지시킴
 			return;
