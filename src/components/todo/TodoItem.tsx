@@ -1,3 +1,4 @@
+import { removeTodo, updateTodo } from "../../api/todo-api";
 import { useAppDispatch } from "../../config/configStore";
 import { deleteTodo, toggleTodo } from "../../modules/todoListSlice";
 import * as S from "../../styles/TodoStyle";
@@ -22,12 +23,14 @@ function TodoItem({ type, todo }: { type: string; todo: Todo }) {
 	}
 
 	// 삭제 버튼: filter메서드로 해당id의 카드빼기
-	const deleteTodoHandler = (id: string) => {
+	const deleteTodoHandler = async (id: string) => {
+		await removeTodo(id);
 		dispatch(deleteTodo(id));
 	};
 
 	// Done 완료&완료취소 버튼 (토글)
-	const onToggleTodoItem = (id: string) => {
+	const onToggleTodoItem = async (id: string) => {
+		await updateTodo(id, { ...todo, isDone: !todo.isDone });
 		dispatch(toggleTodo(id));
 	};
 

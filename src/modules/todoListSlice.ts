@@ -1,14 +1,15 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Todo } from "../types/todoType";
-import { sampleTodo } from "../assets/sampleTodo";
+// import { sampleTodo } from "../assets/sampleTodo";
 
-const initialState: Todo[] = sampleTodo;
+const initialState: Todo[] = [];
+//sampleTodo;
 
 export const todoListSlice = createSlice({
 	name: "todoList",
 	initialState,
 	reducers: {
-		fetchTodo: (state, action: PayloadAction<Todo[]>) => {
+		getTodos: (state, action: PayloadAction<Todo[]>) => {
 			return action.payload;
 		},
 		addTodo: (state, action: PayloadAction<Todo>) => {
@@ -43,6 +44,6 @@ export const todoListSlice = createSlice({
 	},
 });
 
-export const { addTodo, deleteTodo, toggleTodo, sortTodos } =
+export const { getTodos, addTodo, deleteTodo, toggleTodo, sortTodos } =
 	todoListSlice.actions;
 export const todoListReducer = todoListSlice.reducer;

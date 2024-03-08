@@ -3,12 +3,14 @@ import * as S from "../../styles/TodoStyle";
 import { Todo } from "../../types/todoType";
 import { useAppDispatch } from "../../config/configStore";
 import { addTodo } from "../../modules/todoListSlice";
+import { createTodo } from "../../api/todo-api";
 
 function TodoForm() {
 	const dispatch = useAppDispatch();
 
 	// 추가하기 버튼 addTodoHandler
-	const addTodoHandler = (newTodo: Todo) => {
+	const addTodoHandler = async (newTodo: Todo) => {
+		await createTodo(newTodo);
 		dispatch(addTodo(newTodo));
 	};
 

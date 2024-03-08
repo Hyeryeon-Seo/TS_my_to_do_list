@@ -1,25 +1,31 @@
 import Header from "../components/layout/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../styles/TodoStyle";
-import { Todo } from "../types/todoType";
-import { useAppSelector } from "../config/configStore";
+import { getSingleTodo } from "../api/todo-api";
+import { useEffect, useState } from "react";
 
 const Detail = () => {
-	const todoList = useAppSelector((state) => state.todoList);
 	const { todoId } = useParams();
+	const [todo, setTodo] = useState(null);
 
 	const navigate = useNavigate();
-	const selectedTodo: Todo[] | unknown = todoList.find(
-		(todo: Todo) => todo.id === todoId
-	);
+
+	useEffect(() => {
+		const fetchTodo = async () => {
+			const data = await getSingleTodo(todoId);
+			setTodo(data);
+		};
+
+		fetchTodo();
+	}, [todoId]);
 
 	// 홈 화면으로 이동
 	const onClickHomeHandler = () => {
 		navigate("/");
 	};
 
-	if (!todoList) {
-		throw new Error("Unexpected error: Cannot find 'todoList'");
+	if (!todo) {
+		return <div>로딩 중</div>;
 	}
 
 	return (
@@ -33,18 +39,16 @@ const Detail = () => {
 			<S.DetailWrapper>
 				<S.DetailBox>
 					<S.TodoDetailBox>
-						<S.TodoTitle>{selectedTodo.title}</S.TodoTitle>
+						<S.TodoTitle>{todo.title}</S.TodoTitle>
+						<S.TodoContent $pageType="detail">{todo.content}</S.TodoContent>
 						<S.TodoContent $pageType="detail">
-							{selectedTodo.content}
-						</S.TodoContent>
-						<S.TodoContent $pageType="detail">
-							{selectedTodo.isDone ? "👍 완료 🎉" : "🏃‍♀️ 진행 중 🏃"}
+							{todo.isDone ? "👍 완료 🎉" : "🏃‍♀️ 진행 중 🏃"}
 						</S.TodoContent>
 					</S.TodoDetailBox>
 					<S.TodoDeadline $pageType="detail">
-						{selectedTodo.deadline === "9999-12-31"
+						{todo.deadline === "9999-12-31"
 							? "마감일 미정"
-							: `마감일 │ ${selectedTodo.deadline}`}
+							: `마감일 │ ${todo.deadline}`}
 					</S.TodoDeadline>
 				</S.DetailBox>
 			</S.DetailWrapper>

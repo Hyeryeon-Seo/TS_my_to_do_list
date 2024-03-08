@@ -9,13 +9,13 @@ const todoClient = axios.create({
 	},
 });
 
-const fetchTodos = async () => {
-	// : Promise<Todo[]>
+const fetchTodos = async (): Promise<Todo[]> => {
 	try {
-		const { data } = await todoClient.get("/");
-		console.log(data); //data는 있는데, 화면에 렌더링이 안되는?
+		const { data } = await todoClient.get("/"); // <Promise<Todo[]>>
+		console.log(data);
 		return data;
 	} catch (error: any) {
+		console.log(error);
 		throw new Error(error.message);
 	}
 };
@@ -23,6 +23,7 @@ const fetchTodos = async () => {
 const getSingleTodo = async (id: string): Promise<Todo> => {
 	try {
 		const { data } = await todoClient.get(`/${id}`);
+		console.log(data);
 		return data;
 	} catch (error: any) {
 		throw new Error(error.message);
@@ -37,7 +38,7 @@ const createTodo = async (todo: Todo): Promise<void> => {
 	}
 };
 
-const deleteTodo = async (id: string): Promise<void> => {
+const removeTodo = async (id: string): Promise<void> => {
 	try {
 		await todoClient.delete(`/${id}`);
 	} catch (error: any) {
@@ -45,13 +46,7 @@ const deleteTodo = async (id: string): Promise<void> => {
 	}
 };
 
-const updateTodo = async ({
-	id,
-	todo,
-}: {
-	id: string;
-	todo: Todo;
-}): Promise<void> => {
+const updateTodo = async (id: string, todo: Todo): Promise<void> => {
 	try {
 		await todoClient.patch(`/${id}`, todo);
 	} catch (error: any) {
@@ -59,4 +54,4 @@ const updateTodo = async ({
 	}
 };
 
-export { fetchTodos, getSingleTodo, createTodo, deleteTodo, updateTodo };
+export { fetchTodos, getSingleTodo, createTodo, removeTodo, updateTodo };
