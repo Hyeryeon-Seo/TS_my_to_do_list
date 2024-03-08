@@ -5,13 +5,26 @@ import TodoList from "./TodoList";
 import styled from "styled-components";
 import { useAppDispatch } from "../../config/configStore";
 import { getTodosThunk, sortTodos } from "../../modules/todoListSlice";
+import { useQuery } from "@tanstack/react-query";
+import { fetchTodos } from "../../api/todo-api";
+import { DoneTodo, InProgressTodo, Todo } from "../../types/todoType";
 
 function TodoController() {
 	const dispatch = useAppDispatch();
+	const {
+		data: todoList,
+		isLoading,
+		error,
+		// isSuccess,
+	} = useQuery({
+		// data안들어올수있으니 isLoading 등 처리해주기 -BUT 그래도 undefined가능으로 뜸
+		queryKey: ["todoList"],
+		queryFn: () => fetchTodos(),
+	});
 
-	const fetchTodoList = async () => {
-		dispatch(getTodosThunk());
-	};
+	// const fetchTodoList = async () => {
+	// 	dispatch(getTodosThunk());
+	// };
 
 	const [sortOrder, setSortOrder] = useState<string>("asc");
 
@@ -29,10 +42,23 @@ function TodoController() {
 		dispatch(sortTodos("desc"));
 	}, [sortOrder, dispatch]);
 
-	useEffect(() => {
-		fetchTodoList();
-	}, []);
+	// useEffect(() => {
+	// 	fetchTodoList();
+	// }, []);
+	// if (isSuccess) {
+	const workingTodoList: Todo[] = todoList?.filter(
+		(todo) => todo.isDone === false
+	) as InProgressTodo[];
 
+	const doneTodoList = todoList?.filter(
+		(todo) => todo.isDone === true
+	) as DoneTodo[];
+
+	if (isLoading) return <div>Loading ...</div>;
+	if (error) {
+		console.log("error : ", error);
+		return <div> Error : {error.message} </div>;
+	}
 	return (
 		<main>
 			<TodoForm />
@@ -44,8 +70,12 @@ function TodoController() {
 				마감일 순으로 보기
 			</CustomOrderSelect>
 			<ListsSection>
-				<TodoList type="working">Working 🏃‍♀️</TodoList>
-				<TodoList type="done">Done 🎉</TodoList>
+				<TodoList type="working" todoList={workingTodoList}>
+					Working 🏃‍♀️
+				</TodoList>
+				<TodoList type="done" todoList={doneTodoList}>
+					Done 🎉
+				</TodoList>
 			</ListsSection>
 		</main>
 	);
