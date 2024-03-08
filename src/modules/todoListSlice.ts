@@ -71,26 +71,26 @@ export const todoListSlice = createSlice({
 			action.payload;
 		});
 
-		builder.addCase(
-			addTodoThunk.fulfilled,
-			(state, action: PayloadAction<Todo>) => {
-				state.push(action.payload);
-			}
-		);
+		// builder.addCase(
+		// 	addTodoThunk.fulfilled,
+		// 	(state, action: PayloadAction<Todo>) => {
+		// 		state.push(action.payload);
+		// 	}
+		// );
 
-		builder.addCase(
-			deleteTodoThunk.fulfilled,
-			(state, action: PayloadAction<Todo>) => {
-				const targetIndex = state.findIndex(
-					(todo) => todo.id === action.payload
-				);
-				state.splice(targetIndex, 1); // 1개의 원소만 제거
-			}
-		);
-		builder.addCase(toggleTodoThunk.fulfilled, (state, action) => {
-			const targetTodo = state.find((todo) => todo.id === action.payload);
-			targetTodo?.isDone = !targetTodo?.isDone;
-		});
+		// builder.addCase(
+		// 	deleteTodoThunk.fulfilled,
+		// 	(state, action: PayloadAction<Todo>) => {
+		// 		const targetIndex = state.findIndex(
+		// 			(todo) => todo.id === action.payload
+		// 		);
+		// 		state.splice(targetIndex, 1); // 1개의 원소만 제거
+		// 	}
+		// );
+		// builder.addCase(toggleTodoThunk.fulfilled, (state, action) => {
+		// 	const targetTodo = state.find((todo) => todo.id === action.payload);
+		// 	targetTodo?.isDone = !targetTodo?.isDone;
+		// });
 	},
 });
 
