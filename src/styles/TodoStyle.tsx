@@ -1,15 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export interface TodoPageTypeProps {
+interface TodoPageTypeProps {
 	$pageType?: string;
 }
 
-export interface TodoTextBoxProps {
-	$type: string;
-}
-
-export interface BtnDelDoneProps {
+interface TodoTypeProps {
 	$type: string;
 }
 
@@ -45,7 +41,7 @@ export const TodoLink = styled(Link)`
 	color: black;
 `;
 
-export const TodoTextBox = styled.div<TodoTextBoxProps>`
+export const TodoTextBox = styled.div<TodoTypeProps>`
 	text-decoration: ${({ $type }) =>
 		$type === "working" ? "none" : "line-through gray"};
 	display: flex;
@@ -82,7 +78,7 @@ export const TodoBtnBox = styled.div`
 	justify-content: space-between;
 `;
 
-export const BtnDelDone = styled.button<BtnDelDoneProps>`
+export const BtnDelDone = styled.button<TodoTypeProps>`
 	background-color: rgb(250, 243, 231);
 	width: 100px;
 	height: 30px;
@@ -131,4 +127,25 @@ export const DetailBox = styled.div`
 export const TitleContentInputBox = styled.div`
 	display: flex;
 	flex-direction: column;
+`;
+
+// TodoList
+export const TodoListBox = styled.div<TodoTypeProps>`
+	${({ $type }) => ($type === "working" ? "none" : "margin-top: 100px")}
+`;
+
+export const List = styled.li`
+	display: flex;
+	margin-top: 10px;
+	margin-left: 20px;
+	/* 최대 최소넓이는 리스트 뜨는 부분에만 적용*/
+	min-width: 800px;
+	max-width: 1200px;
+	min-height: 250px;
+	flex-wrap: wrap;
+`;
+
+export const ListTitle = styled.h2`
+	font-size: x-large;
+	font-weight: bold;
 `;
