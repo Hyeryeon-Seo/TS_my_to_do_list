@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoForm from "./TodoForm";
 import CustomOrderSelect from "../common/CustomOrderSelect";
 import TodoList from "./TodoList";
@@ -9,22 +9,21 @@ import { useAppDispatch } from "../../../config/configStore";
 function TodoController() {
 	const dispatch = useAppDispatch();
 
-	const [sortOrder, setSortOrder] = useState<string>("desc"); //초기설정 빠른순? 설정안됨
+	const [sortOrder, setSortOrder] = useState<string>("asc");
 
 	// 추가: 마감날짜 오름차순 내림차순 정렬 드롭다운 메뉴 _select 설정시
 	const handleSortOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		// setSortOrder(e.target.value);
-		// sortTodoItems(sortOrder);
-		dispatch(sortTodos(e.target.value)); // ?
+		setSortOrder(e.target.value);
+		dispatch(sortTodos(e.currentTarget.value));
 	};
 
-	//  useEffect(() => {
-	// 		if (sortOrder === "asc") {
-	// 			dispatch(sortTodos("asc"));
-	// 			return;
-	// 		}
-	// 		dispatch(sortTodos("desc"));
-	// 	}, [sortOrder, dispatch]);
+	useEffect(() => {
+		if (sortOrder === "asc") {
+			dispatch(sortTodos("asc"));
+			return;
+		}
+		dispatch(sortTodos("desc"));
+	}, [sortOrder, dispatch]);
 	return (
 		<main>
 			<TodoForm />
