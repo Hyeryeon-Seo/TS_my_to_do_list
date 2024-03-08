@@ -12,7 +12,6 @@ const todoClient = axios.create({
 const fetchTodos = async (): Promise<Todo[]> => {
 	try {
 		const { data } = await todoClient.get("/"); // <Promise<Todo[]>>
-		console.log(data);
 		return data;
 	} catch (error: any) {
 		console.log(error);
@@ -20,10 +19,11 @@ const fetchTodos = async (): Promise<Todo[]> => {
 	}
 };
 
-const getSingleTodo = async (id: string): Promise<Todo> => {
+const getSingleTodo = async (id?: string) => {
+	// : Promise<Todo> 리턴 타입을 없애니까 Detail.jsx에서의 에러 사라짐  Todo 타입이 아니라는?
+	// id?: 라서?
 	try {
 		const { data } = await todoClient.get(`/${id}`);
-		console.log(data);
 		return data;
 	} catch (error: any) {
 		throw new Error(error.message);

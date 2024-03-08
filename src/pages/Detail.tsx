@@ -3,10 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../styles/TodoStyle";
 import { getSingleTodo } from "../api/todo-api";
 import { useEffect, useState } from "react";
+import { Todo } from "../types/todoType";
 
 const Detail = () => {
 	const { todoId } = useParams();
-	const [todo, setTodo] = useState(null);
+	const [todo, setTodo] = useState<Todo[]>([]);
 
 	const navigate = useNavigate();
 
