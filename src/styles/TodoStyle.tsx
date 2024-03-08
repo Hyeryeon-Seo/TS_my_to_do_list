@@ -5,11 +5,7 @@ export interface TodoPageTypeProps {
 	$pageType?: string;
 }
 
-export interface TodoTextBoxProps {
-	type: string;
-}
-
-export interface BtnDelDoneProps {
+export interface TodoTypeProps {
 	type: string;
 }
 
@@ -45,7 +41,7 @@ export const TodoLink = styled(Link)`
 	color: black;
 `;
 
-export const TodoTextBox = styled.div<TodoTextBoxProps>`
+export const TodoTextBox = styled.div<TodoTypeProps>`
 	text-decoration: ${({ type }) =>
 		type === "working" ? "none" : "line-through gray"};
 	display: flex;
@@ -82,7 +78,7 @@ export const TodoBtnBox = styled.div`
 	justify-content: space-between;
 `;
 
-export const BtnDelDone = styled.button<BtnDelDoneProps>`
+export const BtnDelDone = styled.button<TodoTypeProps>`
 	background-color: rgb(250, 243, 231);
 	width: 100px;
 	height: 30px;
