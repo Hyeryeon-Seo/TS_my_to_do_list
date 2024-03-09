@@ -14,7 +14,7 @@ function TodoController({ todoList, setTodoList }: TodoSetList) {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [deadline, setDeadline] = useState("");
-	const [sortOrder, setSortOrder] = useState<string>("desc"); //초기설정 빠른순? 설정안됨
+	const [sortOrder, setSortOrder] = useState<string>("asc");
 
 	// input의 value값 가져오기
 	const handleTitleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

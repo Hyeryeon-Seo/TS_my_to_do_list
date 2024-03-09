@@ -14,8 +14,8 @@ function CustomOrderSelect({
 			<OrderTitle>{children}</OrderTitle>
 			<Select value={selectValue} onChange={selectOnChange}>
 				{/*드롭다운 목록*/}
-				<option value="desc">빠른 순</option>
-				<option value="asc">느린 순</option>
+				<option value="asc">빠른 순</option>
+				<option value="desc">느린 순</option>
 			</Select>
 		</OrderSection>
 	);
